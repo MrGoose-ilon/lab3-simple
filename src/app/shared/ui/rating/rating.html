@@ -1,0 +1,7 @@
+@for (star of stars; track star) {
+  <button type="button" [class.filled]="star <= value()"
+    [attr.aria-label]="'Оцінка ' + star"
+    [disabled]="readonly()" (click)="rate(star)">
+    <app-icon name="star" [fill]="star <= value() ? 'currentColor' : 'none'" />
+  </button>
+}

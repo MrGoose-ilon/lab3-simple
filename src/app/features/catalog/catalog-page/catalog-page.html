@@ -1,0 +1,31 @@
+<h2>Каталог</h2>
+<label>Пошук:
+  <input #search type="text" [value]="query()"
+    (input)="query.set(search.value)"
+    (click)="countSearchClick()" />
+</label>
+<p>Кліки по пошуку: {{ searchClicks() }}</p>
+<p>Мінімальна оцінка: {{ minRating() }}</p>
+<app-rating [(value)]="minRating" />
+<button type="button" (click)="query.set(''); minRating.set(0)">Скинути фільтри</button>
+<p>Знайдено: {{ filteredGames().length }}</p>
+<div class="catalog">
+  @for (game of filteredGames(); track game.id) {
+    <app-game-card [game]="game" (addToCart)="addGame($event)" />
+  } @empty {
+    <p>Ігор не знайдено</p>
+  }
+</div>
+
+<h2>Експеримент OnPush</h2>
+<h3>Звичайний масив</h3>
+<button type="button" (click)="addMutable(games[0])">A (push)</button>
+<button type="button" (click)="addImmutable(games[0])">B (новий масив)</button>
+<p>Лічильник у батька: {{ newArrivals.length }}</p>
+<app-new-arrivals [items]="newArrivals" />
+
+<h3>Масив у signal</h3>
+<button type="button" (click)="addSignal(games[0])">C (новий масив)</button>
+<button type="button" (click)="mutateSignal(games[0])">D (та сама адреса)</button>
+<p>Лічильник у батька: {{ signalArrivals().length }}</p>
+<app-new-arrivals [items]="signalArrivals()" />

@@ -1,0 +1,14 @@
+<article class="card" [class.sold-out]="!game().inStock">
+  <img [src]="game().cover" [alt]="game().title" />
+  <h3>{{ game().title }}</h3>
+  <p class="price">{{ formattedPrice() }}</p>
+  <p>Гравці: {{ game().players }}</p>
+  <p>Складність: {{ game().complexity }}/5</p>
+  <div class="track">
+    <div class="fill" [style.width.%]="game().complexity * 20"></div>
+  </div>
+  <app-rating [value]="game().rating" [readonly]="true" />
+  <p>{{ game().inStock ? 'В наявності' : 'Немає в наявності' }}</p>
+  <button type="button" [disabled]="!game().inStock"
+    (click)="addToCart.emit(game())">У кошик</button>
+</article>

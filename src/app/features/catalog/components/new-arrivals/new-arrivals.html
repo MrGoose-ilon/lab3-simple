@@ -1,0 +1,8 @@
+<p>Дочірній список: {{ items().length }}</p>
+<ol>
+  @for (game of items(); track $index) {
+    <li>{{ game.title }}</li>
+  } @empty {
+    <li>Список порожній</li>
+  }
+</ol>
